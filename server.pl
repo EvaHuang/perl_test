@@ -7,7 +7,7 @@ use Socket;
 
 # use port 7890 as default
 my $port = shift || 8081;
-my $inet_addr = inet_aton("0.0.0.0")
+my $inet_addr = inet_aton("0.0.0.0");
 my $proto = getprotobyname('tcp');
 
 # create a socket, make it reusable

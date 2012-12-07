@@ -7,6 +7,7 @@ use Socket;
 
 # use port 7890 as default
 my $port = shift || 8081;
+my $inet_addr = inet_aton("0.0.0.0")
 my $proto = getprotobyname('tcp');
 
 # create a socket, make it reusable
@@ -16,7 +17,7 @@ setsockopt(SOCKET, SOL_SOCKET, SO_REUSEADDR, 1)
    or die "Can't set socket option to SO_REUSEADDR $!\n";
 
 # bind to a port, then listen
-bind( SOCKET, pack( 'Sn4x8', AF_INET, $port, "\0\0\0\0" ))
+bind( SOCKET, sockaddr_in($port, $inet_addr))
        or die "Can't bind to port $port! \n";
 listen(SOCKET, 5) or die "listen: $!";
 print "SERVER started on port $port\n";
